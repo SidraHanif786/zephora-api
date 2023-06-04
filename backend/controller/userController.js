@@ -1,7 +1,8 @@
-import status from 'http-status';
+const status =require('http-status');
+const asyncHandler = require('express-async-handler');
 
-const authUser =(req, res)=>{
+const authUser =asyncHandler(async(req, res)=>{
     res.status(status.OK).json({message: 'Auth User'});
-};
+});
 
-export {authUser};
+module.exports = {authUser};
