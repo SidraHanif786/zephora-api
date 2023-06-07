@@ -1,5 +1,7 @@
 const express = require("express");
-const userRouter =require("./backend/routes/userRouter.js");
+const userRouter =require("./backend/router/userRouter.js");
+const productRouter = require("./backend/router/products.js");
+const categoryRouter = require("./backend/router/categories.js");
 const dotenv = require('dotenv');
 const bcrypt = require('bcryptjs');
 const connectDB = require('./backend/db');
@@ -17,6 +19,8 @@ app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use('/api/users', userRouter);
+app.use('/products', productRouter);
+app.use('/categories', categoryRouter);
 
 app.get('/', (req, res)=>res.send('Server is ready'));
 
