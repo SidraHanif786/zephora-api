@@ -1,13 +1,21 @@
 const express = require("express");
 const userRouter =require("./backend/routes/userRouter.js");
 const dotenv = require('dotenv');
+const bcrypt = require('bcryptjs');
+const connectDB = require('./backend/db');
 const { notFound, errorHandler } = require("./backend/middleware/errorMiddleware.js");
+const cookieParser = require("cookie-parser");
 
 dotenv.config();
 const port = process.env.PORT || 5000;
 
+connectDB();
+
 const app = express();
 
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+app.use(cookieParser());
 app.use('/api/users', userRouter);
 
 app.get('/', (req, res)=>res.send('Server is ready'));
